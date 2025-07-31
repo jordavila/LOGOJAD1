@@ -7,11 +7,11 @@ const MAX_PARTICLES = 100;
 const PADDING = 30;
 
 logo.onload = () => {
-  // Tamaño del canvas más padding
+  // Ajusta el tamaño del canvas con espacio adicional
   canvas.width = logo.width + PADDING * 2;
   canvas.height = logo.height + PADDING * 2;
 
-  // Dibuja el logo sobre un canvas temporal para extraer píxeles visibles
+  // Canvas temporal para extraer píxeles visibles
   const tempCanvas = document.createElement('canvas');
   tempCanvas.width = canvas.width;
   tempCanvas.height = canvas.height;
@@ -34,11 +34,11 @@ logo.onload = () => {
 
   function getRandomElectricColor(alpha) {
     const colors = [
-      'rgba(173,216,230, OP)', // light blue
-      'rgba(0,255,255, OP)',   // cyan
-      'rgba(255,255,255, OP)', // white
-      'rgba(100,200,255, OP)', // bluish-white
-      'rgba(224,215,63, OP)'   // yellowish
+      'rgba(173,216,230, OP)',
+      'rgba(0,255,255, OP)',
+      'rgba(255,255,255, OP)',
+      'rgba(100,200,255, OP)',
+      'rgba(224,215,63, OP)'
     ];
     let raw = colors[Math.floor(Math.random() * colors.length)];
     return raw.replace('OP', alpha.toFixed(2));
@@ -67,12 +67,12 @@ logo.onload = () => {
   function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Dibuja el logo centrado con padding
+    // Dibuja el logo en el canvas (centrado por padding)
     ctx.drawImage(logo, PADDING, PADDING);
 
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
-      p.vy += 0.15; // gravedad
+      p.vy += 0.15;
       p.x += p.vx;
       p.y += p.vy;
       p.alpha -= 0.01;
