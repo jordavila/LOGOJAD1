@@ -1,1 +1,1 @@
-# LOGOJAD1
+# LOGOJAD version chispas individuales
