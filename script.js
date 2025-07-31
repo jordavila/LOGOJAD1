@@ -2,37 +2,6 @@ const canvas = document.getElementById('spark-canvas');
 const ctx = canvas.getContext('2d');
 const logo = document.getElementById('logo');
 
-logo.onload = () => {
-  const padding = 50; // Espacio extra en todos los bordes
-
-  // Ajusta el tamaño del canvas con padding
-  canvas.width = logo.width + padding * 2;
-  canvas.height = logo.height + padding * 2;
-
-  // Crear un canvas temporal para extraer los píxeles visibles del logo
-  const tempCanvas = document.createElement('canvas');
-  tempCanvas.width = canvas.width;
-  tempCanvas.height = canvas.height;
-  const tempCtx = tempCanvas.getContext('2d');
-
-  // Dibuja el logo en el centro del canvas (considerando el padding)
-  tempCtx.drawImage(logo, padding, padding);
-
-  // Extraer píxeles visibles
-  const imageData = tempCtx.getImageData(0, 0, canvas.width, canvas.height);
-  const visiblePixels = [];
-
-  for (let y = 0; y < canvas.height; y += 4) {
-    for (let x = 0; x < canvas.width; x += 4) {
-      const index = (y * canvas.width + x) * 4;
-      const alpha = imageData.data[index + 3];
-
-      if (alpha > 10) {
-        visiblePixels.push({ x, y });
-      }
-    }
-  }
-
 class Particle {
   constructor(x, y) {
     this.x = x;
@@ -75,16 +44,22 @@ const particles = [];
 let visiblePixels = [];
 
 logo.onload = () => {
-  canvas.width = logo.width;
-  canvas.height = logo.height;
+  const padding = 50; // Espacio extra en todos los bordes
 
-  // Crear canvas temporal para obtener la forma del logo
+  // Ajusta el tamaño del canvas con padding
+  canvas.width = logo.width + padding * 2;
+  canvas.height = logo.height + padding * 2;
+
+  // Crear un canvas temporal para extraer los píxeles visibles del logo
   const tempCanvas = document.createElement('canvas');
   tempCanvas.width = canvas.width;
   tempCanvas.height = canvas.height;
   const tempCtx = tempCanvas.getContext('2d');
-  tempCtx.drawImage(logo, 0, 0);
 
+  // Dibuja el logo en el centro del canvas (considerando el padding)
+  tempCtx.drawImage(logo, padding, padding);
+
+  // Extraer píxeles visibles
   const imageData = tempCtx.getImageData(0, 0, canvas.width, canvas.height);
 
   for (let y = 0; y < canvas.height; y += 4) {
