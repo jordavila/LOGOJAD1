@@ -47,7 +47,7 @@ logo.onload = () => {
   const padding = 50;
 
   canvas.width = logo.width + padding * 2;
-  canvas.height = logo.height + padding * 2;
+  canvas.height = logo.height + padding * 3;
 
   canvas.style.top = `-${padding}px`;
   canvas.style.left = `-${padding}px`;
@@ -102,3 +102,4 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
+
