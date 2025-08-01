@@ -44,8 +44,37 @@ const particles = [];
 let visiblePixels = [];
 
 logo.onload = () => {
-  canvas.width = logo.width;
-  canvas.height = logo.height;
+  const padding = 50; // espacio extra en todos los bordes
+
+  canvas.width = logo.width + padding * 2;
+  canvas.height = logo.height + padding * 2;
+
+  canvas.style.top = `-${padding}px`;
+  canvas.style.left = `-${padding}px`;
+
+  // Crear canvas temporal para obtener la forma del logo
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height;
+  const tempCtx = tempCanvas.getContext('2d');
+  tempCtx.drawImage(logo, padding, padding); // centramos el logo dentro del canvas
+
+  const imageData = tempCtx.getImageData(0, 0, canvas.width, canvas.height);
+
+  for (let y = 0; y < canvas.height; y += 4) {
+    for (let x = 0; x < canvas.width; x += 4) {
+      const index = (y * canvas.width + x) * 4;
+      const alpha = imageData.data[index + 3];
+      if (alpha > 10) {
+        visiblePixels.push({ x, y });
+      }
+    }
+  }
+
+  generateWeldEvent();
+  animate();
+};
+
 
   // Crear canvas temporal para obtener la forma del logo
   const tempCanvas = document.createElement('canvas');
@@ -96,4 +125,5 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
+
 
