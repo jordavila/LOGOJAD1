@@ -9,7 +9,7 @@ class Particle {
     this.vx = (Math.random() - 0.5) * 6;
     this.vy = (Math.random() - 1.5) * 6;
     this.opacity = Math.random() * 1.5;
-    this.radius = Math.random() * 1.5 + 0.8;
+    this.radius = Math.random() * 4 + 1; // *1.5 + 0.8 particulas  muy pequeñas
     this.color = this.getRandomElectricColor();
   }
 
@@ -96,3 +96,4 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
+
