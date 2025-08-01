@@ -44,7 +44,7 @@ class Particle {
 }
 
 logo.onload = () => {
-  const padding = 80;
+  const padding = 180;
 
   canvas.width = logo.width + padding * 2;
   canvas.height = logo.height + padding * 2;
@@ -102,5 +102,6 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
+
 
 
