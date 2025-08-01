@@ -54,23 +54,23 @@ logo.onload = () => {
 
   // Crear canvas temporal para obtener la forma del logo
   const tempCanvas = document.createElement('canvas');
-  tempCanvas.width = canvas.width;
-  tempCanvas.height = canvas.height;
+  tempCanvas.width = logo.width;
+  tempCanvas.height = logo.height;
   const tempCtx = tempCanvas.getContext('2d');
-  tempCtx.drawImage(logo, padding, padding); // centramos el logo dentro del canvas
+  tempCtx.drawImage(logo, 0, 0); 
 
-  const imageData = tempCtx.getImageData(0, 0, canvas.width, canvas.height);
+  const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
 
-  for (let y = 0; y < canvas.height; y += 4) {
-    for (let x = 0; x < canvas.width; x += 4) {
-      const index = (y * canvas.width + x) * 4;
+  for (let y = 0; y < tempCanvas.height; y += 4) {
+    for (let x = 0; x < tempCanvas.width; x += 4) {
+      const index = (y * tempCanvas.width + x) * 4;
       const alpha = imageData.data[index + 3];
       if (alpha > 10) {
-        visiblePixels.push({ x, y });
+        // Ajustamos la posición para que las partículas salgan del área expandida
+        visiblePixels.push({ x: x + padding, y: y + padding });
       }
     }
   }
-
   generateWeldEvent();
   animate();
 };
@@ -125,5 +125,6 @@ function animate() {
 
   requestAnimationFrame(animate);
 }
+
 
 
